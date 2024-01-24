@@ -7,6 +7,7 @@ import {auth} from "../utils/firebase"
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { UserAvatar } from '../utils/constants';
 
 const Login = () => {
 
@@ -39,12 +40,12 @@ const Login = () => {
       
       const user = userCredential.user;
       updateProfile(user, {
-        displayName: name.current.value, photoURL: "https://img.freepik.com/free-psd/3d-icon-social-media-app_23-2150049569.jpg?size=338&ext=jpg&ga=GA1.1.632798143.1705622400&semt=ais"
+        displayName: name.current.value, photoURL:UserAvatar
       }).then(() => {
         // Profile updated!
         const {uid,email,displayName,photoURL} = auth.currentUser;
         dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}));
-        navigate("/browse");
+       
       })
       .catch((error) => {
        seterrormessage(error.message)
@@ -66,7 +67,7 @@ const Login = () => {
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
-    navigate("/browse");
+   
   })
   .catch((error) => {
     const errorCode = error.code;
