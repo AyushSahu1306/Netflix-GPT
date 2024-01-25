@@ -6,7 +6,8 @@ const VideoTitle = ({title,overview}) => {
         <h1 className='text-6xl font-bold'>{title.toUpperCase()}</h1>
         <p className='py-6 text-lg w-2/5'>{overview}</p>
         <div className=''>
-            <button className='bg-white text-black p-4 px-8 text-2xl  rounded-lg hover:bg-opacity-80'> ▶ Play</button>
+            <button className='bg-white text-black p-4 px-8 text-2xl rounded-lg hover:bg-opacity-80'>Play</button>
+            
             <button className='mx-2 bg-gray-500 text-white p-4 px-8 text-2xl bg-opacity-50 rounded-lg'>More info</button>
         </div>
         

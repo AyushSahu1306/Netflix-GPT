@@ -55,7 +55,7 @@ const Header = () => {
 
     <div className='absolute px-8 py-2 bg-gradient-to-b from-black z-10 w-full flex justify-between'>
 
-       <img src={logo} className="w-[180px] mx-[50px]"></img>
+       <img src={logo} className="w-[180px] mx-[50px] h-[80px]"></img>
 
 
       {user && <div className='flex p-2 mt-2'>

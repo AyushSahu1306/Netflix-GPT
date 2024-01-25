@@ -1,4 +1,4 @@
-export const logo='https://assets.stickpng.com/images/580b57fcd9996e24bc43c529.png';
+export const logo='https://www.edigitalagency.com.au/wp-content/uploads/netflix-logo-png-large.png';
   
 export const UserAvatar="https://img.freepik.com/free-psd/3d-icon-social-media-app_23-2150049569.jpg?size=338&ext=jpg&ga=GA1.1.632798143.1705622400&semt=ais";
 
@@ -10,3 +10,4 @@ export const API_OPTIONS = {
     }
   };
   
+export const IMG_CDN_URL="https://image.tmdb.org/t/p/w400"
