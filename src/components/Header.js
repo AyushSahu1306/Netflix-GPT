@@ -5,7 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { useSelector,useDispatch } from 'react-redux';
 import { addUser, removeUser } from '../utils/userSlice';
-import { logo } from '../utils/constants';
+import {  logo } from '../utils/constants';
+import { toggleGPTSearchView } from '../utils/GPTSlice';
+import {SUPPORTED_LANGUAGES} from "../utils/languageConstants";
+import { changeLanguage } from '../utils/configSlice';
 const Header = () => {
   const dispatch=useDispatch();
   const navigate=useNavigate();
@@ -15,6 +18,7 @@ const Header = () => {
   const user=useSelector(store=>store.user);
  // console.log(user?.photoURL);
 
+  const showGPTSearch=useSelector(store=>store.GPT.showGPTSearch)
 
   //we write this here as header will always present and it will check authentication always
   useEffect(()=>{
@@ -47,8 +51,17 @@ const Header = () => {
     });
   }
 
-  const handlepopup=()=>{
-    setpopup(!popup);
+  const handleGPTClick=()=>{
+    //Toggle GPT Search
+    dispatch(toggleGPTSearchView());
+  }
+
+  // const handlepopup=()=>{
+  //   setpopup(!popup);
+  // }
+
+  const handleLanguageChange=(e)=>{
+    dispatch(changeLanguage(e.target.value));
   }
 
   return (
@@ -59,14 +72,24 @@ const Header = () => {
 
 
       {user && <div className='flex p-2 mt-2'>
-        <img alt='user-icon' src={user?.photoURL} className='w-12 h-12 mt-2'></img>
-        <button className='mb-6' onClick={handlepopup}>🔽</button>
+
+      {showGPTSearch && <select className=' bg-gray-700 text-white m-3 ' onChange={handleLanguageChange}>
+      {SUPPORTED_LANGUAGES.map((lang)=> <option key={lang.identifier} value={lang.identifier}>{lang.name}</option>)};
+      </select>}
+
+        {/* <img alt='user-icon' src={user?.photoURL} className='w-12 h-12 mt-2'></img> */}
+
+          <button className='py-2 px-4 m-2 bg-purple-800 text-white rounded-lg ml-4' onClick={handleGPTClick}>
+          {showGPTSearch?"Home":"GPT Search"}  
+            </button>
+
+        {/* <button className='mb-6' onClick={handlepopup}>🔽</button> */}
         <button className='bg-red-600 m-2 rounded-md px-2 h-[50px]  text-white ' onClick={handleSignout}> Sign Out</button>
       </div>}
 
-    {popup && <div className='absolute text-white w-[130px] h-[150px] bg-black top-[50px] right-[120px] opacity-60 '  >
+    {/* {popup && <div className='absolute text-white w-[130px] h-[150px] bg-black top-[50px] right-[120px] opacity-60 '  >
         <h1 className='p-2 m-2'>{user?.displayName}</h1>
-      </div>}
+      </div>} */}
     </div>
   )
 }
