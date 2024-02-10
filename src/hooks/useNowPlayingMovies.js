@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import { API_OPTIONS } from '../utils/constants';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {addNowPlayingMovies} from "../utils/moviesSlice"
 const useNowPlayingMovies = ()=>{
     const dispatch=useDispatch();
 
+    const nowPlayingMovies= useSelector(store=>store.movies.nowPlayingMovies);
+
     const getNowPlayingMovies= async()=> {
       const data=await fetch(
-       'https://api.themoviedb.org/3/movie/now_playing?page=1',
+       'https://api.themoviedb.org/3/movie/now_playing',
         API_OPTIONS
         );
        const json=await data.json();
@@ -16,7 +18,7 @@ const useNowPlayingMovies = ()=>{
     }
    
     useEffect(()=>{
-     getNowPlayingMovies();
+      if(!nowPlayingMovies) getNowPlayingMovies();//this if condition to stop again and again api fetch
     },[])
 }
 

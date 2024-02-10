@@ -79,16 +79,16 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <div className=''>
       <Header/>
 
-      <div className='absolute'>
-      <img alt="" aria-hidden="true" data-uia="nmhp-card-hero+background+image" src={BG_URL}></img>
+      <div className='fixed'>
+      <img alt="" aria-hidden="true" data-uia="nmhp-card-hero+background+image" src={BG_URL} className='h-screen md:h-full object-cover' ></img>
       </div>
 
       {/* u can use formik library to create forms in react */}
 
-      <form onSubmit={(e)=>e.preventDefault()} className="absolute bg-black p-12 w-3/12 my-36 mx-auto right-0 left-0  text-white rounded-lg bg-opacity-80 ">
+      <form onSubmit={(e)=>e.preventDefault()} className="absolute bg-black p-12  md:w-3/12 my-20 md:my-36 mx-auto right-0 left-0  text-white rounded-lg bg-opacity-80 ">
 
         <h1 className='font-bold text-3xl py-4'>{isSignInForm?"Sign In":"Sign Up"}</h1>
 
